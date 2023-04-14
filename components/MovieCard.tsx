@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from "next/router";
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardsProps {
   data: Record<string, any>;
 }
 
 const MovieCard: React.FC<MovieCardsProps> = ({ data }) => {
+  const router = useRouter();
   return (
     <div className="col-span group relative h-[12vw] bg-zinc-900">
       <img
@@ -87,10 +90,11 @@ const MovieCard: React.FC<MovieCardsProps> = ({ data }) => {
                 lg:h-10
                 lg:w-10
               "
-              onClick={() => {}}
+              onClick={() => router.push(`/watch/${data?.id}`)}
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id}/>
           </div>
           <p className="mt-4 font-semibold text-green-400">
             New <span className="text-white ">2023</span>
