@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import useInfoModalStore from "@/hooks/useInfoModalStore";
 import { useRouter } from "next/router";
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import { BiChevronDown } from "react-icons/bi";
 import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardsProps {
@@ -10,6 +12,7 @@ interface MovieCardsProps {
 
 const MovieCard: React.FC<MovieCardsProps> = ({ data }) => {
   const router = useRouter();
+  const { openModal } = useInfoModalStore();
   return (
     <div className="col-span group relative h-[12vw] bg-zinc-900">
       <img
@@ -94,7 +97,29 @@ const MovieCard: React.FC<MovieCardsProps> = ({ data }) => {
             >
               <BsFillPlayFill size={30} />
             </div>
-            <FavoriteButton movieId={data?.id}/>
+            <FavoriteButton movieId={data?.id} />
+            <div
+             onClick={() => openModal(data?.id)}
+              className="
+                group/item 
+                ml-auto 
+                flex 
+                h-6 
+                w-6 
+                cursor-pointer 
+                items-center
+                justify-center 
+                rounded-full 
+                border-2 
+                border-white 
+                transition
+                hover:border-neutral-300 
+                lg:h-10 
+                lg:w-10 
+            "
+            >
+              <BiChevronDown size={30} className="text-white group-hover/item:text-neutral-300"/>
+            </div>
           </div>
           <p className="mt-4 font-semibold text-green-400">
             New <span className="text-white ">2023</span>
